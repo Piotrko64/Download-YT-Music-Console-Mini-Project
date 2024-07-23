@@ -19,11 +19,11 @@ A simple C# console application for downloading music from YouTube, managing pla
 
 1. **Clone the Repository**
 
-    ```bash
-    git clone https://github.com/yourusername/your-repository.git
+```bash
+git clone https://github.com/yourusername/your-repository.git
 
-     Navigate to the Project Directory
-    ```
+Navigate to the Project Directory
+```
 
 > cd your-repository
 
@@ -49,12 +49,12 @@ Usage
 
 #### Download Music
 
-    To download music from a YouTube video, use the appropriate command or option in the application. The application will handle the downloading and saving of audio files.
+To download music from a YouTube video, use the appropriate command or option in the application. The application will handle the downloading and saving of audio files.
 
 #### Manage Playlists
 
-    You can create new playlists, add or remove music files, and manage existing playlists through the console commands provided by the application.
+You can create new playlists, add or remove music files, and manage existing playlists through the console commands provided by the application.
 
 #### Add and Remove Music Files
 
-    Add music files to playlists or remove them as needed. The application will handle the necessary file operations.
+Add music files to playlists or remove them as needed. The application will handle the necessary file operations.
