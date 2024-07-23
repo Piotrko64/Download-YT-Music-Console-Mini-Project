@@ -1,0 +1,26 @@
+# .NET
+*.dll
+*.exe
+*.pdb
+*.obj
+*.exe.config
+*.user
+*.vs
+*.vscode
+*.suo
+*.userosscache
+*.suo
+*.csproj.user
+*.swp
+*.tmp
+
+# Directory for build output
+bin/
+obj/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
