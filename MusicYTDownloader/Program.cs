@@ -2,6 +2,9 @@
 {
     static async Task Main(string[] args)
     {
+
+        Console.Title = "MusicYTDownloader";
+
         string basePath = Path.Combine(Directory.GetCurrentDirectory(), "Music");
         if (!Directory.Exists(basePath))
         {
