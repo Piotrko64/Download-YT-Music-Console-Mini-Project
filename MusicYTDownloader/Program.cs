@@ -15,6 +15,7 @@
         {
             Console.WriteLine("YouTube Music Manager");
             Console.WriteLine("1. Download Music");
+            Console.WriteLine("1t. Download Music and Trim! (NEW FUNCTION)");
             Console.WriteLine("1p. Download Music and open file");
             Console.WriteLine("2. Create Playlist");
             Console.WriteLine("3. Add to Playlist");
@@ -28,6 +29,9 @@
             {
                 case "1":
                     await Music.Download(basePath);
+                    break;
+                case "1t":
+                    await Music.Download(basePath, false, true);
                     break;
                 case "1p":
                     await Music.Download(basePath, true);
