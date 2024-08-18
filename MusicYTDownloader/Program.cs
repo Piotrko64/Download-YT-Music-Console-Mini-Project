@@ -14,14 +14,15 @@
         while (true)
         {
             Console.WriteLine("YouTube Music Manager");
-            Console.WriteLine("1. Download Music");
-            Console.WriteLine("1t. Download Music and Trim! (NEW FUNCTION)");
-            Console.WriteLine("1p. Download Music and open file");
-            Console.WriteLine("2. Create Playlist");
-            Console.WriteLine("3. Add to Playlist");
-            Console.WriteLine("4. Remove from Playlist");
-            Console.WriteLine("5. List Playlists");
-            Console.WriteLine("6. Exit");
+            Console.WriteLine("1 - Download Music");
+            Console.WriteLine("1t - Download Music and Trim! (NEW FUNCTION)");
+            Console.WriteLine("1p - Download Music and open file");
+            Console.WriteLine("1pt - Download Music, trim and open this audio!");
+            Console.WriteLine("2 - Create Playlist");
+            Console.WriteLine("3 - Add to Playlist");
+            Console.WriteLine("4 - Remove from Playlist");
+            Console.WriteLine("5 - List Playlists");
+            Console.WriteLine("6 - Exit");
             Console.Write("Select an option: ");
             var choice = Console.ReadLine();
 
@@ -32,6 +33,9 @@
                     break;
                 case "1t":
                     await Music.Download(basePath, false, true);
+                    break;
+                case "1pt":
+                    await Music.Download(basePath, true, true);
                     break;
                 case "1p":
                     await Music.Download(basePath, true);
