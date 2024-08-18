@@ -12,10 +12,18 @@ static class TrimAssistant
         var inputFile = new MediaFile { Filename = inputFilePath };
         var outputFile = new MediaFile { Filename = outputFilePath };
 
-        TimeSpan? start = string.IsNullOrEmpty(startTime) ? (TimeSpan?)null : TimeSpan.ParseExact(startTime, "mm\\:ss", null);
-        TimeSpan? end = string.IsNullOrEmpty(endTime) ? (TimeSpan?)null : TimeSpan.ParseExact(endTime, "mm\\:ss", null);
+        using (var engine = new Engine())
+        {
+            engine.GetMetadata(inputFile);
+        }
 
-        if (end.HasValue && start.HasValue && end.Value <= start.Value)
+        TimeSpan? start = string.IsNullOrEmpty(startTime) ? (TimeSpan?)null : TimeSpan.ParseExact(startTime, "mm\\:ss", null);
+
+        TimeSpan end = string.IsNullOrEmpty(endTime)
+            ? inputFile.Metadata.Duration
+            : TimeSpan.ParseExact(endTime, "mm\\:ss", null);
+
+        if (start.HasValue && end <= start.Value)
         {
             throw new FormatException("End time must be greater than start time.");
         }
@@ -23,16 +31,32 @@ static class TrimAssistant
         var conversionOptions = new ConversionOptions
         {
             Seek = start ?? TimeSpan.Zero,
-            MaxVideoDuration = end.HasValue
-                ? end.Value - (start ?? TimeSpan.Zero)
-                : TimeSpan.MaxValue - (start ?? TimeSpan.Zero)
+            MaxVideoDuration = end - (start ?? TimeSpan.Zero)
         };
 
-        using (var engine = new Engine())
+        try
         {
-            engine.Convert(inputFile, outputFile, conversionOptions);
+            using (var engine = new Engine())
+            {
+                engine.Convert(inputFile, outputFile, conversionOptions);
+
+                if (!File.Exists(outputFilePath))
+                {
+                    throw new Exception("Output file was not created.");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error during trimming: {ex.Message}");
+            if (File.Exists(outputFilePath))
+            {
+                File.Delete(outputFilePath);
+            }
         }
     }
+
+
 
 
     public static void ConsoleQuestionAboutTimeAndEnd(out string startTime, out string endTime)
