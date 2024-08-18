@@ -36,7 +36,7 @@ class Music
         ConvertToMp3(tempFilePath, outputFilePath);
 
 
-        File.Delete(tempFilePath);
+
 
         if (withTrimMp3)
         {
@@ -44,18 +44,26 @@ class Music
 
             try
             {
+
+
                 TrimAssistant.TrimMp3(outputFilePath, trimmedOutputFilePath, startTime, endTime);
 
                 File.Delete(outputFilePath);
+
+                Console.WriteLine(trimmedOutputFilePath);
 
                 File.Move(trimmedOutputFilePath, outputFilePath);
 
                 Console.WriteLine($"Trimmed MP3 saved as: {outputFilePath}");
 
+
+
+
                 if (isWillOpenFile)
                 {
                     OpenFile(outputFilePath);
                 }
+
             }
             catch (FormatException ex)
             {

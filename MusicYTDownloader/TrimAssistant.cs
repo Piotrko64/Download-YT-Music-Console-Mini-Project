@@ -23,7 +23,9 @@ static class TrimAssistant
         var conversionOptions = new ConversionOptions
         {
             Seek = start ?? TimeSpan.Zero,
-            MaxVideoDuration = (end.HasValue ? end.Value : TimeSpan.MaxValue) - (start ?? TimeSpan.Zero)
+            MaxVideoDuration = end.HasValue
+                ? end.Value - (start ?? TimeSpan.Zero)
+                : TimeSpan.MaxValue - (start ?? TimeSpan.Zero)
         };
 
         using (var engine = new Engine())
@@ -31,6 +33,7 @@ static class TrimAssistant
             engine.Convert(inputFile, outputFile, conversionOptions);
         }
     }
+
 
     public static void ConsoleQuestionAboutTimeAndEnd(out string startTime, out string endTime)
     {
